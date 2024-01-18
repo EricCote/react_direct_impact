@@ -10,9 +10,11 @@ export default function App() {
 
     const [page, setPage] = useState(location.hash)
 
-    window.addEventListener('hashchange', (evt) => {
+    window.addEventListener('hashchange', hashchangeHandler)
+
+    function hashchangeHandler() {
         setPage(location.hash)
-    })
+    }
 
 
     return (
