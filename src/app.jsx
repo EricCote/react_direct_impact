@@ -6,6 +6,11 @@ import About from "./About/About.jsx";
 import Menu from "./Menu.jsx";
 import {useEffect, useState} from "react";
 
+// DOM should never be called from render
+// DOM should only be called from effect
+// Effects are often run with a dependency array
+// The effect is called ONLY if at least one item from the array changes
+
 export default function App() {
     const [page, setPage] = useState(location.hash)
 
