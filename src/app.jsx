@@ -12,9 +12,11 @@ export default function App() {
         window.addEventListener('hashchange', hashchangeHandler)
     }, []);
 
+    useEffect(() => {
+        console.log(`moving to ${page}`)
+    });
 
     function hashchangeHandler() {
-        console.log(location.hash)
         setPage(location.hash)
     }
 
