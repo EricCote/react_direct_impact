@@ -2,7 +2,7 @@
 import "bootstrap/dist/css/bootstrap.css"
 import MyButton from "./MyButton.jsx";
 
-export default function MyCounter({firstName, lastName}) {
+export default function Counter({firstName, lastName}) {
     return (
         <>
             <h1 style={{color: 'red'}}>

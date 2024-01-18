@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css"
-import MyCounter from "./MyCounter.jsx";
+import Counter from "./Counter.jsx";
 import {Container} from "react-bootstrap";
 
 export default function App() {
-    return <Container><MyCounter firstName="Matt" lastName="Leering"/></Container>
+    return <Container><Counter firstName="Matt" lastName="Leering"/></Container>
 }
