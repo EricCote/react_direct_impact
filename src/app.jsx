@@ -14,7 +14,7 @@ export default function App() {
 
     useEffect(() => {
         console.log(`moving to ${page}`)
-    });
+    }, [page]);
 
     function hashchangeHandler() {
         setPage(location.hash)
