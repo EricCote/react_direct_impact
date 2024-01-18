@@ -8,11 +8,13 @@ import {useEffect, useState} from "react";
 
 export default function App() {
     const [page, setPage] = useState(location.hash)
+
     useEffect(() => {
         window.addEventListener('hashchange', hashchangeHandler)
     }, []);
 
     useEffect(() => {
+        document.querySelector('h1').style.color='red'
         console.log(`moving to ${page}`)
     }, [page]);
 
