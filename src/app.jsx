@@ -21,6 +21,9 @@ export default function App() {
     useEffect(() => {
         document.querySelector('h1').style.color='red'
         console.log(`moving to ${page}`)
+        return () => {
+            console.log(`moving out of ${page} (previous instance of page)`)
+        }
     }, [page]);
 
     function hashchangeHandler() {
