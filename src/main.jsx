@@ -7,6 +7,6 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 
 const root = createRoot(document.getElementById("root"))
 
-setInterval(()=>{root.render(<App firstName="Matt" lastName="Leering"/>)}, 1000)
+setInterval(()=>{root.render(<App/>)}, 1000)
 
 

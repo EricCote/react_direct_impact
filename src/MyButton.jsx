@@ -8,7 +8,7 @@ export default  function MyButton() {
 
     const render = useRender();
 
-    return <Button onClick={(count+=1)}>The count is: {count}</Button>
+    return <Button onClick={() => (setCount(count + 1))}>The count is: {count}</Button>
 }
 
 function useRender() {

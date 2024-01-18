@@ -1,17 +1,6 @@
-import MyButton from "./MyButton.jsx";
 import "bootstrap/dist/css/bootstrap.css"
-import {Container} from "react-bootstrap";
+import Counter from "./Counter.jsx";
 
-export default function App({firstName, lastName}) {
-    return (
-        <Container>
-            <h1 style={{color: 'red'}}>
-                Hello {firstName} {lastName}
-            </h1>
-            <p>
-                It is {new Date().toLocaleTimeString()}
-            </p>
-            <MyButton/>
-        </Container>
-    )
+export default function App() {
+    return <Counter firstName="Matt" lastName="Leering"/>
 }
