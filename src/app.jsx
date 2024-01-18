@@ -4,15 +4,17 @@ import {Container} from "react-bootstrap";
 import Home from "./Home/Home.jsx";
 import About from "./About/About.jsx";
 import Menu from "./Menu.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function App() {
-
     const [page, setPage] = useState(location.hash)
+    useEffect(() => {
+        window.addEventListener('hashchange', hashchangeHandler)
+    }, []);
 
-    window.addEventListener('hashchange', hashchangeHandler)
 
     function hashchangeHandler() {
+        console.log(location.hash)
         setPage(location.hash)
     }
 
