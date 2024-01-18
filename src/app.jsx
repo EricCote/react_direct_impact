@@ -4,14 +4,25 @@ import {Container} from "react-bootstrap";
 import Home from "./Home/Home.jsx";
 import About from "./About/About.jsx";
 import Menu from "./Menu.jsx";
+import {useState} from "react";
 
 export default function App() {
-    return <>
+
+    const [page, setPage] = useState(location.hash)
+
+    window.addEventListener('hashchange', (evt) => {
+        setPage(location.hash)
+    })
+
+
+    return (
+        <>
             <Menu/>
             <Container className='mt-3'>
-                <Routing route={location.hash}/>
+                <Routing route={page}/>
             </Container>
         </>
+    )
 
 }
 
