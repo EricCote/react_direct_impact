@@ -1,10 +1,19 @@
 import {useEffect, useState} from "react";
-import {Table} from "react-bootstrap";
+import {Table, Form} from "react-bootstrap";
 
 export default function Movies() {
     const [movies, setMovies] = useState([])
+    const [genres, setGenres] = useState([])
 
-    useEffect(() => {
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MjY1NTlmZDM3OTlmOTQ2NmM2NGVhMGRhYTQyMDU0MyIsInN1YiI6IjU1NGI0OWM3OTI1MTQxNDY5YzAwMTk1NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qJWSAVUgQylJnOnzQkRHVT6OwJpX9EmTOB5n7JcLPek'
+        }
+    };
+
+    function getMovies(genre) {
         const options = {
             method: 'GET',
             headers: {
@@ -13,16 +22,33 @@ export default function Movies() {
             }
         };
 
-        fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=878', options)
+        fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=' + genre, options)
             .then(response => response.json())
-            .then(response => setMovies(response.results))
+            .then(json => setMovies(json.results))
             .catch(err => console.error(err));
+    }
+
+    function getGenres(genre) {
+        fetch('https://api.themoviedb.org/3/genre/movie/list?language=en', options)
+            .then(response => response.json())
+            .then(json => setGenres(json.genres))
+            .catch(err => console.error(err));
+    }
+
+    useEffect(() => {
+        getMovies(878)
     }, []);
 
 
     return (
         <>
             <h1>Movies</h1>
+
+            <Form.Select aria-label="Default select example">
+                <option>Choose Genre</option>
+                {genres.map(genre => <option value={genre.id} key={genre.id}>{genre.name}</option>)}
+            </Form.Select>
+
             <Table striped hover>
                 <thead>
                 <tr>
