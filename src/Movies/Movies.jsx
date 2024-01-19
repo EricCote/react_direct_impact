@@ -41,7 +41,7 @@ export default function Movies() {
                 {genres.map(genre => <option value={genre.id} key={genre.id}>{genre.name}</option>)}
             </Form.Select>
 
-            <Table striped hover className={!movies?.length ? "d-none" : ''}>
+            {!movies.length ? null : <Table striped hover>
                 <thead>
                 <tr>
                     <th>Title</th>
@@ -56,7 +56,8 @@ export default function Movies() {
                     </tr>
                 ))}
                 </tbody>
-            </Table>
+            </Table>}
+
         </>
     );
 }
