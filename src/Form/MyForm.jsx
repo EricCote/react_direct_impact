@@ -1,10 +1,12 @@
 import {Button, Form} from "react-bootstrap";
-import {useRef, useState} from "react";
+import {memo, useCallback, useRef, useState} from "react";
 
 export default function MyForm() {
 
     const [firstName, setFirstName] = useState('almost null')
     const lastNameRef = useRef()
+
+    const clickHandler = useCallback((evt)=>{evt.preventDefault(); alert(lastNameRef.current.value)}, [])
 
     return (
         <>
@@ -29,12 +31,14 @@ export default function MyForm() {
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" onClick={(evt)=>{evt.preventDefault(); alert(lastNameRef.current.value)}}>
+                <MemoizedButton variant="primary" type="submit" onClick={clickHandler}>
                     Submit
-                </Button>
+                </MemoizedButton>
             </Form>
 
             <output>{firstName}</output>
         </>
     )
 }
+
+const MemoizedButton = memo(Button)
