@@ -37,6 +37,7 @@ export default function Movies() {
 
     useEffect(() => {
         getMovies(878)
+        getGenres()
     }, []);
 
 
