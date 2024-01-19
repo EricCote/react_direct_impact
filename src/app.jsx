@@ -29,7 +29,9 @@ function Root(){
 
 let router = createBrowserRouter([
     {
-        path: '/', element: <Root/>,
+        path: '/',
+        element: <Root/>,
+        errorElement: <><Menu/><p>Cannot find this page</p></>,
         children: [
             {isIndex: true,     element: <Home/>},
             {path: "/about",    element: <About/>},
