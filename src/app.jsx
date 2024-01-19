@@ -4,7 +4,7 @@ import {Container} from "react-bootstrap";
 import Home from "./Home/Home.jsx";
 import About from "./About/About.jsx";
 import Menu from "./Menu.jsx";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom";
 
 // DOM should never be called from render
 // DOM should only be called from effect
@@ -13,31 +13,28 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 export default function App() {
 
-    return (
-        <RouterProvider router={router}>
-            <Menu/>
-            <Container className='mt-3'>
-
-            </Container>
-        </RouterProvider>
-    )
+    return <RouterProvider router={router}/>
 
 }
 
+function Root(){
+    return (
+        <>
+            <Menu />
+            <Container className='mt-3'><Outlet/></Container>
+        </>
+    )
+}
+
+
 let router = createBrowserRouter([
     {
-        path: "/",
-        element: <Home/>
+        path: '/', element: <Root/>,
+        children: [
+            {isIndex: true,     element: <Home/>},
+            {path: "/about",    element: <About/>},
+            {path: "/counter",  element: <Counter firstName="Matt" lastName="Leering"/>},
+            {                   element: <p>Page Cannot Be Found</p>},
+        ]
     },
-    {
-        path: "/about",
-        element: <About/>
-    },
-    {
-        path: "/counter",
-        element: <Counter firstName="Matt" lastName="Leering"/>
-    },
-    {
-        element: <p>Page Cannot Be Found</p>
-    },
-])
+    ])
