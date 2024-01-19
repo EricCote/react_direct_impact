@@ -1,13 +1,13 @@
 import "bootstrap/dist/css/bootstrap.css"
 import Counter from "./Counter/Counter.jsx";
-import {Container} from "react-bootstrap";
+import {Container, Spinner} from "react-bootstrap";
 import Home from "./Home/Home.jsx";
 // import About from "./About/About.jsx";
 import Menu from "./Menu.jsx";
 import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom";
 import MyForm from "./Form/MyForm.jsx";
 import Movies from "./Movies/Movies.jsx";
-import {lazy} from "react";
+import {lazy, Suspense} from "react";
 
 
 const About = lazy(() => import('./About/About.jsx'))  // This import statement makes the file get separated from the others when doing npm run build
@@ -27,7 +27,11 @@ function Root(){
     return (
         <>
             <Menu />
-            <Container className='mt-3'><Outlet/></Container>
+            <Container className='mt-3'>
+                <Suspense fallback={<Spinner variant='primary'/>}>
+                    <Outlet/>
+                </Suspense>
+            </Container>
         </>
     )
 }
