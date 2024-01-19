@@ -1,9 +1,11 @@
 import {useEffect, useState} from "react";
-import {Table, Form} from "react-bootstrap";
+import {Table, Form, Spinner} from "react-bootstrap";
+import MovieList from "./MovieList.jsx";
 
 export default function Movies() {
     const [movies, setMovies] = useState([])
     const [genres, setGenres] = useState([])
+    const [isLoading, setLoading] = useState(false)
 
     const options = {
         method: 'GET',
@@ -14,17 +16,21 @@ export default function Movies() {
     };
 
     function getMovies(genre) {
+        setLoading(true)
         fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=' + genre, options)
             .then(response => response.json())
             .then(json => setMovies(json.results))
-            .catch(err => console.error(err));
+            .catch(err => console.error(err))
+            .finally(() => setLoading(false))
     }
 
-    function getGenres(genre) {
+    function getGenres() {
+        setLoading(true)
         fetch('https://api.themoviedb.org/3/genre/movie/list?language=en', options)
             .then(response => response.json())
             .then(json => setGenres(json.genres))
-            .catch(err => console.error(err));
+            .catch(err => console.error(err))
+            .finally(() => setLoading(false))
     }
 
     useEffect(() => {
@@ -34,29 +40,14 @@ export default function Movies() {
 
     return (
         <>
-            <h1>Movies</h1>
+            <h1>Movies {isLoading ? <Spinner variant="primary"/> : null}</h1>
 
             <Form.Select aria-label="Default select example" onChange={(evt) => {evt.preventDefault();getMovies(evt.currentTarget.value)}}>
                 <option>Choose Genre</option>
                 {genres.map(genre => <option value={genre.id} key={genre.id}>{genre.name}</option>)}
             </Form.Select>
 
-            {!movies.length ? null : <Table striped hover>
-                <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Year</th>
-                </tr>
-                </thead>
-                <tbody>
-                {movies.map((movie) => (
-                    <tr key={movie.id}>
-                        <td>{movie.title}</td>
-                        <td>{movie.release_date}</td>
-                    </tr>
-                ))}
-                </tbody>
-            </Table>}
+            {!movies.length ? null : <MovieList movies={movies}/>}
 
         </>
     );
