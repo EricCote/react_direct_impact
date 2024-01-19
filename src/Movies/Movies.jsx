@@ -28,7 +28,6 @@ export default function Movies() {
     }
 
     useEffect(() => {
-        getMovies(878)
         getGenres()
     }, []);
 
@@ -42,7 +41,7 @@ export default function Movies() {
                 {genres.map(genre => <option value={genre.id} key={genre.id}>{genre.name}</option>)}
             </Form.Select>
 
-            <Table striped hover>
+            <Table striped hover className={!movies?.length ? "d-none" : ''}>
                 <thead>
                 <tr>
                     <th>Title</th>
