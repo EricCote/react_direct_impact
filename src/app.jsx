@@ -33,7 +33,8 @@ let router = createBrowserRouter([
         element: <Root/>,
         errorElement: <><Menu/><p>Cannot find this page</p></>,
         children: [
-            {isIndex: true,     element: <Home/>},
+            {path: '/',         element: <Home/>,   isIndex: true},
+            {path: '/home',     element: <Home/>},
             {path: "/about",    element: <About/>},
             {path: "/counter",  element: <Counter firstName="Matt" lastName="Leering"/>},
             {                   element: <p>Page Cannot Be Found</p>},
