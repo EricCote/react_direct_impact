@@ -2,11 +2,14 @@ import "bootstrap/dist/css/bootstrap.css"
 import Counter from "./Counter/Counter.jsx";
 import {Container} from "react-bootstrap";
 import Home from "./Home/Home.jsx";
-import About from "./About/About.jsx";
+// import About from "./About/About.jsx";
 import Menu from "./Menu.jsx";
 import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom";
 import MyForm from "./Form/MyForm.jsx";
 import Movies from "./Movies/Movies.jsx";
+
+
+const About = import('./About/About.jsx') // This import statement makes the file get separated from the others when doing npm run build
 
 // DOM should never be called from render
 // DOM should only be called from effect
