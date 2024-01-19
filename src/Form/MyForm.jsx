@@ -1,9 +1,10 @@
 import {Button, Form} from "react-bootstrap";
-import {useState} from "react";
+import {useRef, useState} from "react";
 
 export default function MyForm() {
 
     const [firstName, setFirstName] = useState('almost null')
+    const lastNameRef = useRef()
 
     return (
         <>
@@ -19,16 +20,16 @@ export default function MyForm() {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                <Form.Group className="mb-3" controlId="formLastName">
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control type="text" placeholder="Last Name" ref={lastNameRef}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" onClick={(evt)=>{evt.preventDefault(); alert(lastNameRef.current.value)}}>
                     Submit
                 </Button>
             </Form>
