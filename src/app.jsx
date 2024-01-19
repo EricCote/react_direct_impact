@@ -5,7 +5,7 @@ import Home from "./Home/Home.jsx";
 import About from "./About/About.jsx";
 import Menu from "./Menu.jsx";
 import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom";
-import Form from "./Form/Form.jsx";
+import MyForm from "./Form/MyForm.jsx";
 
 // DOM should never be called from render
 // DOM should only be called from effect
@@ -38,7 +38,7 @@ let router = createBrowserRouter([
             {path: '/home',     element: <Home/>},
             {path: "/about",    element: <About/>},
             {path: "/counter",  element: <Counter firstName="Matt" lastName="Leering"/>},
-            {path: "/form",     element: <Form/>},
+            {path: "/form",     element: <MyForm/>},
             {                   element: <p>Page Cannot Be Found</p>},
         ]
     },
