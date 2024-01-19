@@ -14,6 +14,7 @@ function Menu() {
                         <Nav.Link as={NavLink} to="/">Home</Nav.Link>
                         <Nav.Link as={NavLink} to="/about">About</Nav.Link>
                         <Nav.Link as={NavLink} to="/counter">Counter</Nav.Link>
+                        <Nav.Link as={NavLink} to="/form">Form</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
