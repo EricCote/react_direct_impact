@@ -31,9 +31,12 @@ export default function Movies() {
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-
-                </tr>
+                {movies.map((movie) => (
+                    <tr key={movie.id}>
+                        <td>{movie.title}</td>
+                        <td>{movie.release_date}</td>
+                    </tr>
+                ))}
                 </tbody>
             </Table>
         </>
