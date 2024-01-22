@@ -46,7 +46,7 @@ let router = createBrowserRouter([
             {path: '/',         element: <Home/>,   isIndex: true},
             {path: '/home',     element: <Home/>},
             {path: "/about",    element: <About/>},
-            {path: "/counter",  element: <Counter firstName="Matt" lastName="Leering"/>},
+            {path: "/counter",  element: <Counter firstName="Mike" lastName="Smith"/>},
             {path: "/form",     element: <MyForm/>},
             {path: "/movies",   element: <Movies/>},
             {                   element: <p>Page Cannot Be Found</p>},
