@@ -12,6 +12,7 @@ import {
 } from 'react-router-dom';
 import MyForm from './Form/MyForm.jsx';
 import Movies from './Movies/Movies.jsx';
+import Contacts from './Contacts/Contacts.jsx';
 import { lazy, Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -35,7 +36,7 @@ function Root() {
       <Container className='mt-3'>
         <Suspense fallback={<Spinner variant='primary' />}>
           <ErrorBoundary
-            fallback={<div>Sorry, there's an error</div>}
+            fallback={<div>Sorry, we have an error</div>}
             key={location.pathname}
           >
             <Outlet />
@@ -61,6 +62,7 @@ let router = createBrowserRouter([
       },
       { path: '/form', element: <MyForm /> },
       { path: '/movies', element: <Movies /> },
+      { path: '/contacts', element: <Contacts /> },
       { element: <p>Page Cannot Be Found</p> },
     ],
   },
