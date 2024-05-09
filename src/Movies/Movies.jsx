@@ -1,4 +1,4 @@
-import { useState, use, cache } from 'react';
+import { useState, use, useMemo } from 'react';
 import { Form } from 'react-bootstrap';
 import MovieList from './MovieList.jsx';
 
@@ -29,14 +29,13 @@ const options = {
 };
 
 export default function Movies() {
-  const cachedGenres = cache(getGenres);
-  const genres = use(cachedGenres());
-  console.log(cachedGenres);
+  const genres = use(getGenres());
+
   const [selectedGenre, setSelectedGenre] = useState(0);
   let movies = [];
+
   if (selectedGenre) {
-    const cachedMovies = cache(getMovies);
-    movies = use(cachedMovies(selectedGenre));
+    movies = use(getMovies(selectedGenre));
   }
 
   return (
