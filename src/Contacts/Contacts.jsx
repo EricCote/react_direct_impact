@@ -21,11 +21,7 @@ export default function Contacts() {
   const [selectedRow, setSelectedRow] = useState(null);
 
   async function saveFn(formData) {
-    const obj = {};
-    obj.id = formData.get('id');
-    obj.firstName = formData.get('firstName');
-    obj.lastName = formData.get('lastName');
-    obj.email = formData.get('email');
+    const obj = Object.fromEntries(formData);
     await ContactAPI.saveContact(obj);
     setSelectedRow(null);
     refetch();
