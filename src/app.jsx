@@ -15,16 +15,25 @@ import Movies from './Movies/Movies.jsx';
 import Contacts from './Contacts/Contacts.jsx';
 import { lazy, Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const About = lazy(() => import('./About/About.jsx')); // This import statement makes the file get separated from the others when doing npm run build
 
-// DOM should never be called from render
-// DOM should only be called from effect
-// Effects are often run with a dependency array
-// The effect is called ONLY if at least one item from the array changes
+// Configure for all queries
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+    },
+  },
+});
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  );
 }
 
 function Root() {
