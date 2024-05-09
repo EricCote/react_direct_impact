@@ -3,7 +3,6 @@ CHALLENGE
 
 if you are starting from my project, remember to npm install --force
 
-1. Complete the cancel button
-2. Start working on the save button
+1. Start working on the Delete
 
 If you have a question, ask

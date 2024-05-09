@@ -1,15 +1,15 @@
-import { use, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import ContactAPI from './ContactApiAzure';
 import { Button, FormControl, Table } from 'react-bootstrap';
 
-import { Save2, XCircle, PencilFill } from 'react-bootstrap-icons';
+import { Save2, XCircle, PencilFill, XOctagon } from 'react-bootstrap-icons';
 import { useQuery } from '@tanstack/react-query';
 
 export default function Contacts() {
   // const contacts = use(ContactAPI.getAllContacts());
 
   const { data: contacts, refetch } = useQuery({
-    queryKey: 'contacts',
+    queryKey: ['contacts'],
     queryFn: ContactAPI.getAllContacts,
     options: {
       cacheTime: 10000,
@@ -17,8 +17,14 @@ export default function Contacts() {
       refetchOnWindowFocus: true,
     },
   });
-
   const [selectedRow, setSelectedRow] = useState(null);
+
+  useEffect(() => {
+    ContactAPI.registerNotification(refetch);
+    return () => {
+      ContactAPI.unregisterNotification();
+    };
+  }, [refetch]);
 
   async function saveFn(formData) {
     const obj = Object.fromEntries(formData);
@@ -81,8 +87,19 @@ export default function Contacts() {
                         e.preventDefault();
                         setSelectedRow(c.id);
                       }}
+                      className='me-2'
                     >
                       <PencilFill color='white' size={12} />
+                    </Button>
+                    <Button
+                      size='sm'
+                      onClick={async (evt) => {
+                        evt.preventDefault();
+                        await ContactAPI.deleteContact(c.id);
+                        refetch();
+                      }}
+                    >
+                      <XOctagon color='white' size={12} />
                     </Button>
                   </td>
                 </tr>
